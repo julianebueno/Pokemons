@@ -1,0 +1,15 @@
+Para criar arquivo pelo terminal:
+    touch arquivo.txt
+
+ctrl+p
+
+ctrl+f = prettier
+
+seleciona e ctrl+; vira comentário
+
+ctrl+shift+t abre terminal
+
+Para abrir o server, digitar no terminal:
+    http-server.cmd .\  
+Para encerrar 
+    ctrl+c
