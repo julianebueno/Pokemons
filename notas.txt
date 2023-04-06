@@ -13,3 +13,7 @@ Para abrir o server, digitar no terminal:
     http-server.cmd .\  
 Para encerrar 
     ctrl+c
+
+
+.
+
