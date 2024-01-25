@@ -4,32 +4,72 @@
 * {
   font-family: "Roboto", sans-serif;
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: #20cd9155;
+}
+
+header, footer{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding:  1rem;
+}
+
+button{
+  border-style: none;
+  background-color: #20cd91;
+  color: #ffffff;
+  padding: .5rem;
+  border-radius: .5rem;
+  cursor: pointer;
 }
 
 main {
+  background-color: #ffffff;
   padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-grow: 1;
 }
 
 .albumPokemon {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+  display: flex;
+  flex-wrap: wrap;
+  gap: .5rem;
+  justify-content: center;
+  align-items: center;
+  
   padding: 0;
   margin: 0;
 }
 
 .cardPokemon{
-  margin: 0.5rem;
-  padding: 1rem;
+  padding: .5rem;
   border-radius: .5rem;
   background-color: #20cd91;
   color: #ffffff;
   display: flex;
   flex-direction: column;
+  height: 140px;
+  width: 120px;
+
 }
 
-.albumPokemon div img, .cardPokemon img{
+.cardPokemon img{
   border-style: none;
   max-width: 100%;
-  height: 100px;
-  align-self: flex-end;
+  height: 100%;
+  align-self: center;
+}
+
+.cardPokemon p{
+  align-self: center;
 }
