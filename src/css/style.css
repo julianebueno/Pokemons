@@ -58,9 +58,14 @@ main {
   color: #ffffff;
   display: flex;
   flex-direction: column;
-  height: 140px;
+  height: 120px;
   width: 120px;
+}
 
+.cardPokemon:hover{
+  background-color: #20cd91bb;
+  color: #ffffff;
+  cursor: pointer;
 }
 
 .cardPokemon img{

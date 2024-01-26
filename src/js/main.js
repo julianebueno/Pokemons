@@ -7,7 +7,7 @@ async function pegarPokemonAPI(inicio, quantiaPokemon) {
   for (let i = inicio; i <= quantiaPokemon; i++) {
     const response = await axios.get(`https://pokeapi.co/api/v2/pokemon/${i}`);
     const data = response.data;
-    data.img = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/${i}.png`;
+    data.img = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${i}.png`;
     arrayPokemon.push(data);
   }
 
@@ -38,21 +38,31 @@ function criarCard(arrayPokemon) {
 
 function voltarPagina() {
   if (ini > 1) {
-    ini -= 30;
-    quantPokemon -= 30;
+    ini -= quantPokemon;
+    qPokemon -= quantPokemon;
     albumPokemon.innerHTML = "";
-    pegarPokemonAPI(ini, quantPokemon);
+    pegarPokemonAPI(ini, qPokemon);
   }
 }
 
 function avancarPagina() {
-  ini += 30;
-  quantPokemon += 30;
+  ini += quantPokemon;
+  qPokemon += quantPokemon;
   albumPokemon.innerHTML = "";
-  pegarPokemonAPI(ini, quantPokemon);
+  pegarPokemonAPI(ini, qPokemon);
 }
 
 let albumPokemon = document.getElementById("albumPokemon");
+
+larguraTela = window.innerWidth;
 let ini = 1;
-let quantPokemon = 30;
+let quantPokemon = 1;
+if (larguraTela < 900) {
+  quantPokemon = 20;
+} else if (larguraTela < 1700) {
+  quantPokemon = 50;
+} else {
+  quantPokemon = 100;
+} 
+let qPokemon = quantPokemon;
 pegarPokemonAPI(ini, quantPokemon);
