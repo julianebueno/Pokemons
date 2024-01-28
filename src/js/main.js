@@ -3,11 +3,10 @@ async function pegarPokemonAPI(inicio, quantiaPokemon) {
   msg.innerHTML = "Carregando...";
   albumPokemon.append(msg);
 
-  let arrayPokemon = [];
+  arrayPokemon = [];
   for (let i = inicio; i <= quantiaPokemon; i++) {
     const response = await axios.get(`https://pokeapi.co/api/v2/pokemon/${i}`);
     const data = response.data;
-    data.img = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${i}.png`;
     arrayPokemon.push(data);
   }
 
@@ -19,11 +18,13 @@ function criarCard(arrayPokemon) {
   for (let i = 0; i < arrayPokemon.length; i++) {
     let card = document.createElement("div");
     card.classList.add("cardPokemon");
+    card.setAttribute("id", arrayPokemon[i].id);
+    card.setAttribute("onclick", "switchModal('" + card.id + "')");
 
     let idPokemon = document.createElement("small");
     idPokemon.innerHTML = arrayPokemon[i].id;
     let imagePokemon = document.createElement("img");
-    imagePokemon.src = arrayPokemon[i].img;
+    imagePokemon.src = arrayPokemon[i].sprites.front_default;
     let namePokemon = document.createElement("p");
     namePokemon.innerHTML =
       arrayPokemon[i].name.charAt(0).toUpperCase() +
@@ -52,6 +53,43 @@ function avancarPagina() {
   pegarPokemonAPI(ini, qPokemon);
 }
 
+const switchModal = (indet) => {
+  const modal = document.querySelector('.modal')
+  const actualStyle = modal.style.display
+  if(actualStyle == 'block') {
+    modal.style.display = 'none'
+  }
+  else {
+    const infoModal = document.querySelector('.content')
+    infoModal.innerHTML = '';
+    indet = indet - ini;
+
+    let idPok = document.createElement("small");
+    idPok.innerHTML = arrayPokemon[indet].id;
+    infoModal.append(idPok);
+
+    let imgPok = document.createElement("img");
+    imgPok.src = arrayPokemon[indet].sprites.front_default;
+    infoModal.append(imgPok);
+    
+    let namePok = document.createElement("p");
+    namePok.innerHTML = arrayPokemon[indet].name.charAt(0).toUpperCase() + arrayPokemon[indet].name.slice(1);
+    infoModal.append(namePok);
+    
+    for (let i = 0; i < arrayPokemon[indet].types.length; i++) {
+      let typePok = document.createElement("small");
+      typePok.innerHTML = arrayPokemon[indet].types[i].type.name.charAt(0).toUpperCase() + arrayPokemon[indet].types[i].type.name.slice(1);
+      infoModal.append(typePok);
+    }
+    
+    modal.append(infoModal);
+    modal.style.display = 'block'
+  }
+}
+
+// ========================
+
+let arrayPokemon = [];
 let albumPokemon = document.getElementById("albumPokemon");
 
 larguraTela = window.innerWidth;
@@ -66,3 +104,10 @@ if (larguraTela < 900) {
 } 
 let qPokemon = quantPokemon;
 pegarPokemonAPI(ini, quantPokemon);
+
+window.onclick = function(event) {
+  const modal = document.querySelector(".modal");
+  if (event.target == modal) {
+    switchModal();
+  }
+};
