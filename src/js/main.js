@@ -5,6 +5,9 @@ async function pegarPokemonAPI(inicio, quantiaPokemon) {
 
   arrayPokemon = [];
   for (let i = inicio; i <= quantiaPokemon; i++) {
+    if (i < 1 || i > 1025) {
+      break;
+    }
     const response = await axios.get(`https://pokeapi.co/api/v2/pokemon/${i}`);
     const data = response.data;
     arrayPokemon.push(data);
@@ -47,10 +50,12 @@ function voltarPagina() {
 }
 
 function avancarPagina() {
-  ini += quantPokemon;
-  qPokemon += quantPokemon;
-  albumPokemon.innerHTML = "";
-  pegarPokemonAPI(ini, qPokemon);
+  if (qPokemon < 1025) {
+    ini += quantPokemon;
+    qPokemon += quantPokemon;
+    albumPokemon.innerHTML = "";
+    pegarPokemonAPI(ini, qPokemon);
+  }
 }
 
 const switchModal = (indet) => {
