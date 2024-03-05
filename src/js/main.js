@@ -58,38 +58,44 @@ function avancarPagina() {
   }
 }
 
-const switchModal = (indet) => {
+const switchModal = (ind) => {
   const modal = document.querySelector('.modal')
   const actualStyle = modal.style.display
   if(actualStyle == 'block') {
     modal.style.display = 'none'
   }
   else {
-    const infoModal = document.querySelector('.content')
-    infoModal.innerHTML = '';
-    indet = indet - ini;
-
-    let idPok = document.createElement("small");
-    idPok.innerHTML = arrayPokemon[indet].id;
-    infoModal.append(idPok);
-
-    let imgPok = document.createElement("img");
-    imgPok.src = arrayPokemon[indet].sprites.front_default;
-    infoModal.append(imgPok);
-    
-    let namePok = document.createElement("p");
-    namePok.innerHTML = arrayPokemon[indet].name.charAt(0).toUpperCase() + arrayPokemon[indet].name.slice(1);
-    infoModal.append(namePok);
-    
-    for (let i = 0; i < arrayPokemon[indet].types.length; i++) {
-      let typePok = document.createElement("small");
-      typePok.innerHTML = arrayPokemon[indet].types[i].type.name.charAt(0).toUpperCase() + arrayPokemon[indet].types[i].type.name.slice(1);
-      infoModal.append(typePok);
-    }
-    
-    modal.append(infoModal);
+    modal.append(construirModal(ind));
     modal.style.display = 'block'
   }
+}
+
+function construirModal(indet) {
+  const infoModal = document.querySelector('.content')
+  infoModal.innerHTML = '';
+  indet = indet - ini;
+
+  // let div1 = document.createElement("div");
+
+  let idPok = document.createElement("small");
+  idPok.innerHTML = arrayPokemon[indet].id;
+  infoModal.append(idPok);
+
+  let imgPok = document.createElement("img");
+  imgPok.src = arrayPokemon[indet].sprites.front_default;
+  infoModal.append(imgPok);
+  
+  let namePok = document.createElement("p");
+  namePok.innerHTML = arrayPokemon[indet].name.charAt(0).toUpperCase() + arrayPokemon[indet].name.slice(1);
+  infoModal.append(namePok);
+  
+  for (let i = 0; i < arrayPokemon[indet].types.length; i++) {
+    let typePok = document.createElement("small");
+    typePok.innerHTML = arrayPokemon[indet].types[i].type.name.charAt(0).toUpperCase() + arrayPokemon[indet].types[i].type.name.slice(1);
+    infoModal.append(typePok);
+  }
+  
+  return infoModal;
 }
 
 // ========================
@@ -101,11 +107,11 @@ larguraTela = window.innerWidth;
 let ini = 1;
 let quantPokemon = 1;
 if (larguraTela < 900) {
-  quantPokemon = 20;
+  quantPokemon = 10;
 } else if (larguraTela < 1700) {
-  quantPokemon = 50;
+  quantPokemon = 20;
 } else {
-  quantPokemon = 100;
+  quantPokemon = 30;
 } 
 let qPokemon = quantPokemon;
 pegarPokemonAPI(ini, quantPokemon);
