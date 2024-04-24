@@ -24,18 +24,29 @@ function criarCard(arrayPokemon) {
     card.setAttribute("id", arrayPokemon[i].id);
     card.setAttribute("onclick", "switchModal('" + card.id + "')");
 
+    let containerCard1 = document.createElement("div");
     let idPokemon = document.createElement("small");
     idPokemon.innerHTML = arrayPokemon[i].id;
-    let imagePokemon = document.createElement("img");
-    imagePokemon.src = arrayPokemon[i].sprites.front_default;
     let namePokemon = document.createElement("p");
     namePokemon.innerHTML =
       arrayPokemon[i].name.charAt(0).toUpperCase() +
       arrayPokemon[i].name.slice(1);
+    let namePokemon2 = document.createElement("p");
+    namePokemon2.innerHTML =
+      arrayPokemon[i].name.charAt(0).toUpperCase() +
+      arrayPokemon[i].name.slice(1);
+    containerCard1.append(idPokemon);
+    containerCard1.append(namePokemon);  
+    containerCard1.append(namePokemon2);  
 
-    card.append(idPokemon);
-    card.append(imagePokemon);
-    card.append(namePokemon);
+    let containerCard2 = document.createElement("div");
+    let imagePokemon = document.createElement("img");
+    imagePokemon.src = arrayPokemon[i].sprites.front_default;
+    imagePokemon.classList.add("imagePokemon");
+    containerCard2.append(imagePokemon);
+      
+    card.append(containerCard1);
+    card.append(containerCard2);
     albumPokemon.append(card);
   }
 }
@@ -105,14 +116,7 @@ let albumPokemon = document.getElementById("albumPokemon");
 
 larguraTela = window.innerWidth;
 let ini = 1;
-let quantPokemon = 1;
-if (larguraTela < 900) {
-  quantPokemon = 10;
-} else if (larguraTela < 1700) {
-  quantPokemon = 20;
-} else {
-  quantPokemon = 30;
-} 
+let quantPokemon = 12;
 let qPokemon = quantPokemon;
 pegarPokemonAPI(ini, quantPokemon);
 
