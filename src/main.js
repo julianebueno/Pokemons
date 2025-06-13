@@ -24,29 +24,36 @@ function criarCard(arrayPokemon) {
     card.setAttribute("id", arrayPokemon[i].id);
     card.setAttribute("onclick", "switchModal('" + card.id + "')");
 
-    let containerCard1 = document.createElement("div");
-    let idPokemon = document.createElement("small");
-    idPokemon.innerHTML = arrayPokemon[i].id;
-    let namePokemon = document.createElement("p");
-    namePokemon.innerHTML =
-      arrayPokemon[i].name.charAt(0).toUpperCase() +
-      arrayPokemon[i].name.slice(1);
-    let namePokemon2 = document.createElement("p");
-    namePokemon2.innerHTML =
-      arrayPokemon[i].name.charAt(0).toUpperCase() +
-      arrayPokemon[i].name.slice(1);
-    containerCard1.append(idPokemon);
-    containerCard1.append(namePokemon);  
-    containerCard1.append(namePokemon2);  
-
-    let containerCard2 = document.createElement("div");
     let imagePokemon = document.createElement("img");
     imagePokemon.src = arrayPokemon[i].sprites.front_default;
     imagePokemon.classList.add("imagePokemon");
-    containerCard2.append(imagePokemon);
-      
-    card.append(containerCard1);
-    card.append(containerCard2);
+    card.append(imagePokemon);
+
+    let idPokemon = document.createElement("p");
+    idPokemon.innerHTML = arrayPokemon[i].id;
+    card.append(idPokemon);
+
+    let namePokemon = document.createElement("p");
+    namePokemon.innerHTML = arrayPokemon[i].name
+    card.append(namePokemon);  
+
+    let typesPokemon = document.createElement("p");
+    typesPokemon.classList.add("typesPokemon");
+    if (arrayPokemon[i].types.length > 1) {
+      for (let j = 0; j < arrayPokemon[i].types.length; j++) {
+        let typePokemon = document.createElement("small");
+        typePokemon.style.backgroundColor = typeColor[arrayPokemon[i].types[j].type.name];
+        typePokemon.innerHTML = arrayPokemon[i].types[j].type.name;
+        typesPokemon.append(typePokemon);
+      }
+    } else {
+      let typePokemon = document.createElement("small");
+      typePokemon.style.backgroundColor = typeColor[arrayPokemon[i].types[0].type.name];
+      typePokemon.innerHTML = arrayPokemon[i].types[0].type.name;
+      typesPokemon.append(typePokemon);
+    }
+    card.append(typesPokemon);
+    
     albumPokemon.append(card);
   }
 }
@@ -116,8 +123,28 @@ let albumPokemon = document.getElementById("albumPokemon");
 
 larguraTela = window.innerWidth;
 let ini = 1;
-let quantPokemon = 12;
+let quantPokemon = 10;
 let qPokemon = quantPokemon;
+let typeColor = {
+  normal: "#A8A77A",
+  fire: "#EE8130",
+  water: "#6390F0",
+  grass: "#7AC74C",
+  electric: "#F7D02C",
+  ice: "#96D9D6",
+  fighting: "#C22E28",
+  poison: "#A33EA1",
+  ground: "#E2BF65",
+  flying: "#A98FF3",
+  psychic: "#F95587",
+  bug: "#A6B91A",
+  rock: "#B6A136",
+  ghost: "#735797",
+  dragon: "#6F35FC",
+  dark: "#705746",
+  steel: "#B7B7CE",
+  fairy: "#D685AD"
+};
 pegarPokemonAPI(ini, quantPokemon);
 
 window.onclick = function(event) {

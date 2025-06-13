@@ -2,9 +2,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;500;700&display=swap');
 
 :root{
-  --color-primary: #20cd91;
-  --color-primary-light: #20cd9155;
-  --color-primary-dark: #20cd91bb;
+  --color-primary: #23c9a5;
+  --color-primary-light: #00cd9155;
+  --color-primary-dark: #00cd91bb;
   --color-secondary: #f0f0f0;
   --color-secondary-light: #f0f0f0cc;
   --color-black: #0f0f0f;
@@ -61,8 +61,8 @@ main {
   justify-content: center;
   align-items: center;
   width: 100%;
+  max-width: 1200px;
   flex-grow: 1;
-
 }
 
 .cardPokemon{
@@ -71,9 +71,19 @@ main {
   background-color: var(--color-primary);
   color: var(--color-secondary);
   display: flex;
-  flex-basis: 400px;
-  height: 210px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex-basis: 200px;
+  height: 220px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
 
+@media screen and (max-width: 600px) {
+  .cardPokemon {
+    flex-basis: 180px;
+    height: 180px;
+  }
 }
 
 .cardPokemon:hover{
@@ -82,19 +92,40 @@ main {
   cursor: pointer;
 }
 
-.cardPokemon div {
-  width: 100%;
-}
-
 .cardPokemon img{
   border-style: none;
   max-width: 100%;
   height: 100%;
   align-self: center;
+  filter: drop-shadow(0 4px 16px rgba(0, 0, 0, 0.3));
+  border-bottom: var(--color-secondary) 1px dotted;
+
 }
 
-.cardPokemon p{
-  align-self: center;
+.cardPokemon p {
+  margin-left: 2rem;
+  padding: .1em;
+  color: var(--color-secondary);
+  text-align: center;
+  text-transform: capitalize;
+  align-self: self-start;
+}
+
+.typesPokemon {
+  display: flex;
+  flex-direction: row;
+  gap: .5rem;
+  align-items: center;
+  justify-content: center;
+}
+
+.cardPokemon small {
+  padding: .2em;
+  border-radius: .5rem;
+  color: var(--color-secondary);
+  font-size: .8rem;
+  text-transform: uppercase;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 /* ======================= */
