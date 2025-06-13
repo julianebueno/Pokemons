@@ -1,32 +1,23 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
   <head>
-  
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
     <!-- Favicon -->
     <link rel="icon" href="./src/img/logo.svg" type="image/x-icon" />
-
     <!-- Normalize CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" integrity="sha512-NhSC1YmyruXifcj/KFRWoC561YpHpc5Jtzgvbuzx5VozKpWvQ+4nXhPdFgmx8xqexRcpAglTj9sIBWINXa8x5w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-
     <!-- CSS -->
-    <link rel="stylesheet" href="./src/css/style.css" />
-
+    <link rel="stylesheet" href="./src/style.css" />
     <!-- JS -->
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js" defer></script>
-    <script src="./src/js/main.js" defer></script>
-    
+    <script src="./src/main.js" defer></script>
     <!-- TITULO -->
     <title>Pokedex</title>
-
   </head>
 
   <body>
-
     <header>
       <h2>Pokedex</h2>
       <section>
@@ -34,14 +25,12 @@
         <button onclick="avancarPagina()">Próximo</button>
       </section>
     </header>
-
     <main>
       <div class="modal">
         <div class="content"></div>
       </div>
       <section id="albumPokemon" class="albumPokemon"></section>
     </main>
-    
     <footer>
       <h4>Pokedex <small>&#174</small></h4>
     </footer>
