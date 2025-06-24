@@ -50,10 +50,10 @@ function MostrarCarregando() {
 
 
 // #region ================================== CONTROLLER
-async function pegarPokemonAPI(inicio, quantiaPokemon) {
+async function pegarPokemonAPI(quantiaPokemon) {
   albumPokemon.append(MostrarCarregando());
-
-  for (let i = inicio; i <= quantiaPokemon; i++) {
+  let limite = arrayPokemon.length + quantiaPokemon;
+  for (let i = arrayPokemon.length + 1; i <= limite; i++) {
     if (i < 1 || i > 1025) {
       break;
     }
@@ -61,12 +61,11 @@ async function pegarPokemonAPI(inicio, quantiaPokemon) {
     const data = response.data;
     arrayPokemon.push(data);
   }
-  
-  albumPokemon.innerHTML = "";
   criarCard(arrayPokemon);
 }
 
 function criarCard(arrayPokemon) {
+  albumPokemon.innerHTML = "";
   for (let i = 0; i < arrayPokemon.length; i++) {
     let card = ConstuirCardPokemon(arrayPokemon[i]);
     card.style.backgroundColor = typeColor[arrayPokemon[i].types[0].type.name];
@@ -75,10 +74,8 @@ function criarCard(arrayPokemon) {
 }
 
 function carregarMaisPokemons() {
-  if (qPokemon < 1025) {
-    ini += quantPokemon;
-    qPokemon += quantPokemon;
-    pegarPokemonAPI(ini, qPokemon);
+  if (arrayPokemon.length <= 1025) {
+    pegarPokemonAPI(passoQuantiaPokemon);
   }
 }
 // #endregion =============================== CONTROLLER
@@ -92,37 +89,56 @@ const switchModal = (ind) => {
     modal.style.display = 'none'
   }
   else {
-    modal.append(construirModal(ind));
+    construirModal(ind - 1);
     modal.style.display = 'block'
   }
 }
 
 function construirModal(indet) {
-  const infoModal = document.querySelector('.content')
-  infoModal.innerHTML = '';
-  indet = indet - ini;
+  let pokemonModal = arrayPokemon[indet];
 
-  // let div1 = document.createElement("div");
+  let pokemonName = document.getElementById("pokemonName");
+  pokemonName.innerHTML = pokemonModal.name;
 
-  let idPok = document.createElement("small");
-  idPok.innerHTML = arrayPokemon[indet].id;
-  infoModal.append(idPok);
+  let pokemonImage = document.getElementById("pokemonImage");
+  pokemonImage.src = pokemonModal.sprites.front_default;
+  pokemonImage.alt = pokemonModal.name;
 
-  let imgPok = document.createElement("img");
-  imgPok.src = arrayPokemon[indet].sprites.front_default;
-  infoModal.append(imgPok);
-  
-  let namePok = document.createElement("p");
-  namePok.innerHTML = arrayPokemon[indet].name.charAt(0).toUpperCase() + arrayPokemon[indet].name.slice(1);
-  infoModal.append(namePok);
-  
-  for (let i = 0; i < arrayPokemon[indet].types.length; i++) {
-    let typePok = document.createElement("small");
-    typePok.innerHTML = arrayPokemon[indet].types[i].type.name.charAt(0).toUpperCase() + arrayPokemon[indet].types[i].type.name.slice(1);
-    infoModal.append(typePok);
+  let pokemonHeight = document.getElementById("pokemonHeight");
+  pokemonHeight.innerHTML = (pokemonModal.height / 10) + " m";
+
+  let pokemonWeight = document.getElementById("pokemonWeight");
+  pokemonWeight.innerHTML = (pokemonModal.weight / 10) + " kg";
+
+  let pokemonType = document.getElementById("pokemonType");
+  pokemonType.innerHTML = "";
+  if (pokemonModal.types.length > 1) {
+    for (let j = 0; j < pokemonModal.types.length; j++) {
+      let typePokemon = document.createElement("small");
+      typePokemon.style.backgroundColor = typeColor[pokemonModal.types[j].type.name];
+      typePokemon.innerHTML = pokemonModal.types[j].type.name;
+      pokemonType.append(typePokemon);
+    }
+  } else {
+    let typePokemon = document.createElement("small");
+    typePokemon.style.backgroundColor = typeColor[pokemonModal.types[0].type.name];
+    typePokemon.innerHTML = pokemonModal.types[0].type.name;
+    pokemonType.append(typePokemon);
   }
-  
-  return infoModal;
+
+  let pokemonAbilities = document.getElementById("pokemonAbilities");
+  pokemonAbilities.innerHTML = "";
+  if (pokemonModal.abilities.length > 1) {
+    for (let j = 0; j < pokemonModal.abilities.length; j++) {
+      let abilityPokemon = document.createElement("small");
+      abilityPokemon.innerHTML = pokemonModal.abilities[j].ability.name;
+      pokemonAbilities.append(abilityPokemon);
+    }
+  } else {
+    let abilityPokemon = document.createElement("small");
+    abilityPokemon.innerHTML = pokemonModal.abilities[0].ability.name;
+    pokemonAbilities.append(abilityPokemon);
+  }
 }
 // #endregion =============================== MODAL
 
@@ -131,11 +147,7 @@ function construirModal(indet) {
 
 let arrayPokemon = [];
 let albumPokemon = document.getElementById("albumPokemon");
-
-let ini = 1;
-let quantPokemon = 10;
-let qPokemon = quantPokemon;
-
+let passoQuantiaPokemon = 10;
 let typeColor = {
   normal: "#A8A77A",
   fire: "#EE8130",
@@ -159,7 +171,7 @@ let typeColor = {
 
 // #endregion =============================== GLOBAL VARIABLES
 
-pegarPokemonAPI(ini, quantPokemon);
+pegarPokemonAPI(passoQuantiaPokemon);
 
 // #region ================================== EVENT LISTENERS
 document.getElementById("botaoVerMais").addEventListener("click", carregarMaisPokemons);

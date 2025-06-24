@@ -120,7 +120,7 @@ main {
 }
 
 .cardPokemon small {
-  padding: .2em;
+  padding: .2em .4em;
   border-radius: .5rem;
   color: var(--color-secondary);
   font-size: .8rem;
@@ -159,8 +159,58 @@ main {
   padding: 20px;
   border: 1px solid var(--border-color-modal-content);
   width: 80%;
-
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+#pokemonName {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  text-transform: capitalize;
+}
+
+#pokemonImage {
+  max-width: 100%;
+  height: auto;
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem;
+  border: solid 1px var(--color-black);
+}
+
+#pokemonType {
+  display: flex;
+  gap: .5rem;
+  margin-bottom: 1rem;
+}
+
+#pokemonType small {
+  padding: .2em .4em;
+  border-radius: .5rem;
+  color: var(--color-secondary);
+  font-size: .8rem;
+  text-transform: uppercase;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+#pokemonAbilities {
+  display: flex;
+  gap: .5rem;
+  margin-bottom: 1rem;
+}
+
+#pokemonAbilities small {
+  margin: .2rem 0;
+  padding: .2em .4em;
+  border-radius: .5rem;
+  background-color: var(--color-black-light);
+  color: var(--color-secondary);
+  font-size: .8rem;
+  text-transform: capitalize;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
