@@ -96,13 +96,16 @@ const switchModal = (ind) => {
 
 function construirModal(indet) {
   let pokemonModal = arrayPokemon[indet];
-
+  
   let pokemonName = document.getElementById("pokemonName");
   pokemonName.innerHTML = pokemonModal.name;
 
   let pokemonImage = document.getElementById("pokemonImage");
   pokemonImage.src = pokemonModal.sprites.front_default;
   pokemonImage.alt = pokemonModal.name;
+
+  let pokemonId = document.getElementById("pokemonId");
+  pokemonId.innerHTML = "#" + pokemonModal.id.toString().padStart(4, '0');
 
   let pokemonHeight = document.getElementById("pokemonHeight");
   pokemonHeight.innerHTML = (pokemonModal.height / 10) + " m";
@@ -139,6 +142,11 @@ function construirModal(indet) {
     abilityPokemon.innerHTML = pokemonModal.abilities[0].ability.name;
     pokemonAbilities.append(abilityPokemon);
   }
+
+  let pokemonDescription = document.getElementById("pokemonDescription");
+  // pokemonDescription.innerHTML = pokemonModal.flavor_text_entries[0].flavor_text;
+  pokemonDescription.innerHTML = "Descrição não disponível.";
+
 }
 // #endregion =============================== MODAL
 

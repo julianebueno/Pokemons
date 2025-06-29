@@ -156,41 +156,50 @@ main {
 .modal .content {
   background-color: var(--background-color-modal-content);
   margin: 15% auto;
-  padding: 20px;
-  border: 1px solid var(--border-color-modal-content);
   width: 80%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  max-width: 600px;
+  max-height: 90vh;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  grid-template-areas: "pokemonImage info" "descricao descricao";
+  border-radius: 20px;
+  animation: pop 0.2s ease-in-out;
+}
+
+@keyframes pop {
+  from {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
 }
 
 #pokemonName {
   font-size: 1.5rem;
-  margin-bottom: 1rem;
   text-transform: capitalize;
 }
 
 #pokemonImage {
-  max-width: 100%;
-  height: auto;
+  grid-area: pokemonImage;
+  height: 100%;
 }
 
 .info {
+  grid-area: info;
   display: flex;
   flex-direction: column;
-  align-items: center;
   padding: 1rem;
-  border: solid 1px var(--color-black);
+  line-height: 1.5;
 }
 
-#pokemonType {
-  display: flex;
-  gap: .5rem;
-  margin-bottom: 1rem;
-}
+
 
 #pokemonType small {
-  padding: .2em .4em;
+  padding: 0 .4rem;
+  margin: 0 .1rem;
   border-radius: .5rem;
   color: var(--color-secondary);
   font-size: .8rem;
@@ -198,19 +207,33 @@ main {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
-#pokemonAbilities {
-  display: flex;
-  gap: .5rem;
-  margin-bottom: 1rem;
-}
-
 #pokemonAbilities small {
-  margin: .2rem 0;
-  padding: .2em .4em;
+  padding: 0 .4rem;
+  margin: 0 .1rem;
   border-radius: .5rem;
   background-color: var(--color-black-light);
   color: var(--color-secondary);
   font-size: .8rem;
-  text-transform: capitalize;
+  text-transform: uppercase;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+#pokemonDescription {
+  grid-area: descricao;
+  padding: 1rem;
+  text-align: justify;
+  color: var(--color-black);
+  font-size: 1rem;
+}
+
+
+@media screen and (max-width: 720px) {
+  .modal .content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .modal .content > div {
+    width: 100%;
+  }
 }
