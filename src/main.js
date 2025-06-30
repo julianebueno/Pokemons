@@ -43,6 +43,7 @@ function ConstuirCardPokemon(pokemon) {
 // #region ================================== VIEW
 function MostrarCarregando() {
   let msg = document.createElement("p");
+  msg.classList.add("carregando");
   msg.innerHTML = "Carregando...";
   return msg;
 }
@@ -51,6 +52,7 @@ function MostrarCarregando() {
 
 // #region ================================== CONTROLLER
 async function pegarPokemonAPI(quantiaPokemon) {
+  botaoVerMais.style.display = "none";
   albumPokemon.append(MostrarCarregando());
   let limite = arrayPokemon.length + quantiaPokemon;
   for (let i = arrayPokemon.length + 1; i <= limite; i++) {
@@ -62,6 +64,11 @@ async function pegarPokemonAPI(quantiaPokemon) {
     arrayPokemon.push(data);
   }
   criarCard(arrayPokemon);
+  if (arrayPokemon.length < 1025) {
+    botaoVerMais.style.display = "block";
+  } else {
+    botaoVerMais.style.display = "none";
+  }
 }
 
 function criarCard(arrayPokemon) {
@@ -155,6 +162,7 @@ function construirModal(indet) {
 
 let arrayPokemon = [];
 let albumPokemon = document.getElementById("albumPokemon");
+let botaoVerMais = document.getElementById("botaoVerMais");
 let passoQuantiaPokemon = 10;
 let typeColor = {
   normal: "#A8A77A",

@@ -128,6 +128,15 @@ main {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
+.carregando {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 1rem;
+  width: 100%;
+  color: var(--color-black);
+}
+
 .botaoVerMais {
   margin-top: 1rem;
 }
